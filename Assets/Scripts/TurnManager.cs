@@ -96,9 +96,14 @@ public class TurnManager : Singleton<TurnManager>
         }
     }
 
+    private void Critical()
+    {
+
+    }
+
     private void Fire(Tile tileTargeted)
     {
-        int diceResult = Random.Range(1, 6);
+        int diceResult = Random.Range(1, 8);
         Debug.Log("Dice Result : " + diceResult);
 
         switch (diceResult)
@@ -108,19 +113,31 @@ public class TurnManager : Singleton<TurnManager>
                 break;
 
             case 2:
-                tileTargeted.GetNeighbour(ENeighbourType.TOP).TakeDamage(1);
+                tileTargeted.TakeDamage(1);
+
                 break;
 
             case 3:
-                tileTargeted.GetNeighbour(ENeighbourType.RIGHT).TakeDamage(1);
+                tileTargeted.GetNeighbour(ENeighbourType.TOP).TakeDamage(1);
+
                 break;
 
             case 4:
-                tileTargeted.GetNeighbour(ENeighbourType.BOTTOM).TakeDamage(1);
+                tileTargeted.GetNeighbour(ENeighbourType.RIGHT).TakeDamage(1);
+
                 break;
 
             case 5:
+                tileTargeted.GetNeighbour(ENeighbourType.BOTTOM).TakeDamage(1);
+
+                break;
+
+            case 6:
                 tileTargeted.GetNeighbour(ENeighbourType.LEFT).TakeDamage(1);
+
+                break;
+            case 7:
+                Critical();
                 break;
         }
     }

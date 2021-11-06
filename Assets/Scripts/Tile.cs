@@ -25,6 +25,8 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool _isFull = false;
     [SerializeField] private EOccupationType _occupationType = EOccupationType.NONE;
     [SerializeField] private GameObject _block = null;
+    [SerializeField] private bool _explosivePlaced = false;
+
 
     [Header("Crew")]
     [SerializeField] private MeshRenderer _crewRenderer = null;
@@ -156,15 +158,24 @@ public class Tile : MonoBehaviour
     {
         if(_isFull == true)
         {
-            switch(_occupationType)
+            if(_explosivePlaced == true)
             {
-                case EOccupationType.BLOCK:
-                    _block.SetActive(false);
-                    break;
-                case EOccupationType.CREW:
-                    _crewRenderer.gameObject.SetActive(false);
-                    break;
+                //Fonction Explosion
             }
+            else
+            {
+                switch (_occupationType)
+                {
+                    case EOccupationType.BLOCK:
+                        _block.SetActive(false);
+                        break;
+                    case EOccupationType.CREW:
+                        _crewRenderer.gameObject.SetActive(false);
+                        break;
+                }
+            }
+
+        
         }
     }
 
@@ -191,6 +202,11 @@ public class Tile : MonoBehaviour
 
         return null;
 
+    }
+
+    public void PlaceExplosive()
+    {
+        _explosivePlaced = true;
     }
     #endregion public Methods
     #endregion Methods
